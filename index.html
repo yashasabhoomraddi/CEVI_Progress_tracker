@@ -2,65 +2,186 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Topic Check-in</title>
+<title>Linux Fundamentals — Chapter 1 Check-in</title>
 <style>
-  body { font-family: system-ui, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 20px; color: #222; }
-  h1 { font-size: 1.4rem; }
-  .question { margin-bottom: 28px; }
-  label { display: block; font-weight: 600; margin-bottom: 8px; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+    color: #1c1c1c;
+    background: #fafafa;
+    line-height: 1.5;
+  }
+
+  .header { margin-bottom: 32px; }
+  h1 { font-size: 1.6rem; margin: 0 0 6px; }
+  .subtitle { font-size: 0.95rem; color: #555; margin: 0; }
+  .paste-note {
+    font-size: 0.82rem; color: #888; margin-top: 10px;
+    padding: 8px 12px; background: #fff;
+    border-left: 3px solid #ccc; border-radius: 4px;
+  }
+
+  .section {
+    background: #fff; border: 1px solid #e5e5e5; border-radius: 10px;
+    padding: 24px 24px 8px; margin-bottom: 24px;
+  }
+  .section-title {
+    font-size: 1.05rem; font-weight: 700; color: #1a1a1a;
+    margin: 0 0 4px; display: flex; align-items: center; gap: 8px;
+  }
+  .section-number {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px; background: #2563eb; color: white;
+    border-radius: 50%; font-size: 0.8rem; font-weight: 700; flex-shrink: 0;
+  }
+  .section-desc {
+    font-size: 0.88rem; color: #666; margin: 0 0 20px; padding-left: 32px;
+  }
+
+  .question { margin-bottom: 26px; }
+  .q-label { display: block; font-weight: 600; font-size: 0.98rem; margin-bottom: 6px; }
+  .q-num { color: #2563eb; margin-right: 4px; }
+
+  .importance {
+    display: inline-block; font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 0.03em; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 4px; margin-bottom: 8px;
+    background: #fef3c7; color: #92400e;
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+  .importance-note {
+    font-size: 0.85rem; font-style: italic; color: #92400e;
+    background: #fffbeb; border-left: 3px solid #f59e0b;
+    padding: 8px 12px; border-radius: 4px; margin: 6px 0 10px;
+  }
+
   textarea, input[type="text"] {
-    width: 100%; box-sizing: border-box; padding: 10px; font-size: 1rem;
-    border: 1px solid #ccc; border-radius: 6px; font-family: inherit;
+    width: 100%; padding: 10px 12px; font-size: 0.95rem;
+    border: 1px solid #d0d0d0; border-radius: 6px;
+    font-family: inherit; background: #fdfdfd;
   }
-  textarea { min-height: 90px; resize: vertical; }
-  .warning {
-    display: none; color: #b3261e; font-size: 0.85rem; margin-top: 6px;
-  }
+  textarea { min-height: 85px; resize: vertical; }
+  textarea:focus, input:focus { outline: none; border-color: #2563eb; background: #fff; }
+
+  .warning { display: none; color: #b3261e; font-size: 0.82rem; margin-top: 6px; }
+
+  .identity-section { display: flex; gap: 16px; }
+  .identity-section .question { flex: 1; margin-bottom: 0; }
+
   button {
-    background: #2563eb; color: white; border: none; padding: 10px 20px;
-    border-radius: 6px; font-size: 1rem; cursor: pointer;
+    background: #2563eb; color: white; border: none; padding: 12px 28px;
+    border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; width: 100%;
   }
   button:hover { background: #1d4ed8; }
-  .note { font-size: 0.85rem; color: #666; margin-top: 4px; }
+  button:disabled { background: #94a3b8; cursor: not-allowed; }
+
+  .status { font-size: 0.9rem; margin-top: 12px; text-align: center; }
 </style>
 </head>
 <body>
 
-<h1>Topic Check-in</h1>
-<p class="note">Answers must be typed directly. Pasting is disabled on all fields.</p>
+<div class="header">
+  <h1>Linux Fundamentals — Chapter 1 Check-in</h1>
+  <p class="subtitle">Answer based on what you actually read, ran, or observed — not a general definition.</p>
+  <p class="paste-note">Pasting is disabled on every field. Type your own answer directly.</p>
+</div>
 
 <form id="checkinForm">
 
-  <div class="question">
-    <label for="name">Full Name *</label>
-    <input type="text" id="name" name="name" required>
+  <div class="section">
+    <div class="section-title"><span class="section-number">·</span>Your Details</div>
+    <div class="identity-section">
+      <div class="question">
+        <label class="q-label" for="name">Full Name *</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="question">
+        <label class="q-label" for="usn">USN *</label>
+        <input type="text" id="usn" name="usn" required>
+      </div>
+    </div>
   </div>
 
-  <div class="question">
-    <label for="usn">USN *</label>
-    <input type="text" id="usn" name="usn" required>
+  <div class="section">
+    <div class="section-title"><span class="section-number">1</span>What / Why Linux</div>
+    <p class="section-desc">The context behind why you're learning any of this at all.</p>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q1.</span>What is Linux, in plain terms — and where have you likely already encountered it without realizing?</label>
+      <textarea id="q1" name="q1" required></textarea>
+      <div class="warning" id="warn1">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <div class="importance">Worth knowing well</div>
+      <div class="importance-note">This directly affects you: any future GPU/dedicated-server work will assume you're comfortable with this.</div>
+      <label class="q-label"><span class="q-num">Q2.</span>If you're working with a dedicated GPU server or system in the future, you'll connect to it remotely rather than sitting in front of it. What do you think that connection process is called, and why might a secure connection matter?</label>
+      <textarea id="q2" name="q2" required></textarea>
+      <div class="warning" id="warn2">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q3.</span>What's the actual difference between a GUI and a CLI, and why is a CLI often more efficient for a developer or researcher?</label>
+      <textarea id="q3" name="q3" required></textarea>
+      <div class="warning" id="warn3">Pasting isn't allowed here — please type your answer.</div>
+    </div>
   </div>
 
-  <div class="question">
-    <label for="q1">1. In the resource you were given, what specific value/parameter stood out to you and why?</label>
-    <textarea id="q1" name="q1" required></textarea>
-    <div class="warning" id="warn1">Pasting isn't allowed here — please type your answer.</div>
+  <div class="section">
+    <div class="section-title"><span class="section-number">2</span>Basic Commands</div>
+    <p class="section-desc">The everyday tools — you'll use these constantly, not just once.</p>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q4 (cp).</span>You want to copy an entire folder, not just one file. Plain <code>cp</code> will fail on a directory — why, and what flag fixes it?</label>
+      <textarea id="q4" name="q4" required></textarea>
+      <div class="warning" id="warn4">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q5 (grep).</span>You have a large log file and want every line mentioning a specific error, case-insensitive, with line numbers shown. What command would you run?</label>
+      <textarea id="q5" name="q5" required></textarea>
+      <div class="warning" id="warn5">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q6 (sed).</span>You have a text file where "cat" appears 20 times and you want every one changed to "dog" — without opening the file in an editor. What one-line command does this?</label>
+      <textarea id="q6" name="q6" required></textarea>
+      <div class="warning" id="warn6">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q7 (rm).</span><code>rm</code> deletes a single file, but running it on a folder gives an error. What's the correct way to delete an entire directory and everything inside it?</label>
+      <textarea id="q7" name="q7" required></textarea>
+      <div class="warning" id="warn7">Pasting isn't allowed here — please type your answer.</div>
+    </div>
   </div>
 
-  <div class="question">
-    <label for="q2">2. What's one thing you got wrong or found confusing while working through this topic?</label>
-    <textarea id="q2" name="q2" required></textarea>
-    <div class="warning" id="warn2">Pasting isn't allowed here — please type your answer.</div>
-  </div>
+  <div class="section">
+    <div class="section-title"><span class="section-number">3</span>SSH & tmux</div>
+    <p class="section-desc">Concepts that only become obvious the hard way — better to know them before that happens.</p>
 
-  <div class="question">
-    <label for="q3">3. Short answer (one line):</label>
-    <input type="text" id="q3" name="q3" required>
-    <div class="warning" id="warn3">Pasting isn't allowed here — please type your answer.</div>
+    <div class="question">
+      <div class="importance">Worth knowing well</div>
+      <div class="importance-note">This is what you'll actually be typing every time you connect to a server — not optional background knowledge.</div>
+      <label class="q-label"><span class="q-num">Q8 (SSH).</span>What is SSH actually doing when you connect to a remote machine — what problem does it solve that plain networking doesn't? If you've tried it yourself, what command did you use?</label>
+      <textarea id="q8" name="q8" required></textarea>
+      <div class="warning" id="warn8">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <div class="importance">Important — read carefully</div>
+      <div class="importance-note">This one has real consequences if skipped: it's the difference between losing hours of work and not.</div>
+      <label class="q-label"><span class="q-num">Q9 (tmux).</span>If you start a long-running process over SSH and your laptop sleeps, WiFi drops, or you close the terminal, that process normally dies with the connection. What tool exists specifically to prevent this, and how does it work?</label>
+      <textarea id="q9" name="q9" required></textarea>
+      <div class="warning" id="warn9">Pasting isn't allowed here — please type your answer.</div>
+    </div>
   </div>
 
   <button type="submit" id="submitBtn">Submit</button>
-  <div class="note" id="statusMsg" style="margin-top:10px;"></div>
+  <div class="status" id="statusMsg"></div>
 </form>
 
 <script>
@@ -101,6 +222,12 @@
         q1: document.getElementById('q1').value,
         q2: document.getElementById('q2').value,
         q3: document.getElementById('q3').value,
+        q4: document.getElementById('q4').value,
+        q5: document.getElementById('q5').value,
+        q6: document.getElementById('q6').value,
+        q7: document.getElementById('q7').value,
+        q8: document.getElementById('q8').value,
+        q9: document.getElementById('q9').value,
         timestamp: new Date().toISOString()
       };
 

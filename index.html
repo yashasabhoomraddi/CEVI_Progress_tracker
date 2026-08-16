@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Topic Check-in</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 20px; color: #222; }
+  h1 { font-size: 1.4rem; }
+  .question { margin-bottom: 28px; }
+  label { display: block; font-weight: 600; margin-bottom: 8px; }
+  textarea, input[type="text"] {
+    width: 100%; box-sizing: border-box; padding: 10px; font-size: 1rem;
+    border: 1px solid #ccc; border-radius: 6px; font-family: inherit;
+  }
+  textarea { min-height: 90px; resize: vertical; }
+  .warning {
+    display: none; color: #b3261e; font-size: 0.85rem; margin-top: 6px;
+  }
+  button {
+    background: #2563eb; color: white; border: none; padding: 10px 20px;
+    border-radius: 6px; font-size: 1rem; cursor: pointer;
+  }
+  button:hover { background: #1d4ed8; }
+  .note { font-size: 0.85rem; color: #666; margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<h1>Topic Check-in</h1>
+<p class="note">Answers must be typed directly. Pasting is disabled on all fields.</p>
+
+<form id="checkinForm">
+
+  <div class="question">
+    <label for="name">Full Name *</label>
+    <input type="text" id="name" name="name" required>
+  </div>
+
+  <div class="question">
+    <label for="usn">USN *</label>
+    <input type="text" id="usn" name="usn" required>
+  </div>
+
+  <div class="question">
+    <label for="q1">1. In the resource you were given, what specific value/parameter stood out to you and why?</label>
+    <textarea id="q1" name="q1" required></textarea>
+    <div class="warning" id="warn1">Pasting isn't allowed here — please type your answer.</div>
+  </div>
+
+  <div class="question">
+    <label for="q2">2. What's one thing you got wrong or found confusing while working through this topic?</label>
+    <textarea id="q2" name="q2" required></textarea>
+    <div class="warning" id="warn2">Pasting isn't allowed here — please type your answer.</div>
+  </div>
+
+  <div class="question">
+    <label for="q3">3. Short answer (one line):</label>
+    <input type="text" id="q3" name="q3" required>
+    <div class="warning" id="warn3">Pasting isn't allowed here — please type your answer.</div>
+  </div>
+
+  <button type="submit" id="submitBtn">Submit</button>
+  <div class="note" id="statusMsg" style="margin-top:10px;"></div>
+</form>
+
+<script>
+  // Block paste, drag-drop text, and right-click context menu on all inputs/textareas
+  const fields = document.querySelectorAll('textarea, input[type="text"]');
+
+  fields.forEach(field => {
+    const warningEl = document.getElementById('warn' + field.id.replace('q', ''));
+
+    field.addEventListener('paste', (e) => {
+      e.preventDefault();
+      if (warningEl) {
+        warningEl.style.display = 'block';
+        setTimeout(() => warningEl.style.display = 'none', 2500);
+      }
+    });
+
+    field.addEventListener('drop', (e) => e.preventDefault());
+    field.addEventListener('contextmenu', (e) => e.preventDefault()); // blocks right-click paste
+  });
+
+  // ⚠️ REPLACE THIS with your own deployed Apps Script Web App URL (see hosting instructions)
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8TCHyELIqAZLeGI4B8szhtHa6QIOovrPMuQAx-9Y2Jd1AWWXGgNejDkacgSS7oRvM/exec";
+
+  document.getElementById('checkinForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMsg = document.getElementById('statusMsg');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+    statusMsg.style.color = '#666';
+    statusMsg.textContent = '';
+
+    try {
+      const payload = {
+        name: document.getElementById('name').value,
+        usn: document.getElementById('usn').value,
+        q1: document.getElementById('q1').value,
+        q2: document.getElementById('q2').value,
+        q3: document.getElementById('q3').value,
+        timestamp: new Date().toISOString()
+      };
+
+      const response = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'text/plain' } // avoids CORS preflight issues with Apps Script
+      });
+
+      const result = await response.json();
+
+      if (result.status === 'success') {
+        statusMsg.style.color = '#166534';
+        statusMsg.textContent = '✓ Submitted successfully.';
+        document.getElementById('checkinForm').reset();
+      } else {
+        throw new Error(result.message || 'Unknown error from server');
+      }
+    } catch (err) {
+      statusMsg.style.color = '#b3261e';
+      statusMsg.textContent = '✗ Submission failed: ' + err.message + '. Please try again — your answers are still in the form.';
+      console.error(err);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit';
+    }
+  });
+</script>
+
+</body>
+</html>

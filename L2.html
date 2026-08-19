@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CV Fundamentals — Week 1 Check-in</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+    color: #1c1c1c;
+    background: #fafafa;
+    line-height: 1.5;
+  }
+
+  .header { margin-bottom: 32px; }
+  h1 { font-size: 1.6rem; margin: 0 0 6px; }
+  .subtitle { font-size: 0.95rem; color: #555; margin: 0; }
+  .paste-note {
+    font-size: 0.82rem; color: #888; margin-top: 10px;
+    padding: 8px 12px; background: #fff;
+    border-left: 3px solid #ccc; border-radius: 4px;
+  }
+  .weight-note {
+    font-size: 0.85rem; color: #1e40af; margin-top: 8px;
+    padding: 8px 12px; background: #eff6ff;
+    border-left: 3px solid #2563eb; border-radius: 4px;
+  }
+
+  .section {
+    background: #fff; border: 1px solid #e5e5e5; border-radius: 10px;
+    padding: 24px 24px 8px; margin-bottom: 24px;
+  }
+  .section-title {
+    font-size: 1.05rem; font-weight: 700; color: #1a1a1a;
+    margin: 0 0 4px; display: flex; align-items: center; gap: 8px;
+  }
+  .section-number {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px; background: #2563eb; color: white;
+    border-radius: 50%; font-size: 0.8rem; font-weight: 700; flex-shrink: 0;
+  }
+  .section-desc {
+    font-size: 0.88rem; color: #666; margin: 0 0 20px; padding-left: 32px;
+  }
+
+  .question { margin-bottom: 26px; }
+  .q-label { display: block; font-weight: 600; font-size: 0.98rem; margin-bottom: 6px; }
+  .q-num { color: #2563eb; margin-right: 4px; }
+
+  .hint {
+    font-size: 0.85rem; font-style: italic; color: #555;
+    background: #f5f5f5; border-left: 3px solid #999;
+    padding: 8px 12px; border-radius: 4px; margin: 6px 0 10px;
+  }
+
+  .q-image {
+    max-width: 100%; border: 1px solid #ddd; border-radius: 6px;
+    margin: 10px 0; display: block;
+  }
+
+  textarea, input[type="text"] {
+    width: 100%; padding: 10px 12px; font-size: 0.95rem;
+    border: 1px solid #d0d0d0; border-radius: 6px;
+    font-family: inherit; background: #fdfdfd;
+  }
+  textarea { min-height: 85px; resize: vertical; }
+  textarea:focus, input:focus { outline: none; border-color: #2563eb; background: #fff; }
+
+  .warning { display: none; color: #b3261e; font-size: 0.82rem; margin-top: 6px; }
+
+  .identity-section { display: flex; gap: 16px; }
+  .identity-section .question { flex: 1; margin-bottom: 0; }
+
+  button {
+    background: #2563eb; color: white; border: none; padding: 12px 28px;
+    border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; width: 100%;
+  }
+  button:hover { background: #1d4ed8; }
+  button:disabled { background: #94a3b8; cursor: not-allowed; }
+
+  .status { font-size: 0.9rem; margin-top: 12px; text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Computer Vision Fundamentals — Week 1 Check-in</h1>
+  <p class="subtitle">Image Formation & Radiometry · Filtering & Restoration · Projective Geometry & Camera Models · SLAM</p>
+  <p class="paste-note">Pasting is disabled on every field. Type your own answer directly.</p>
+  <p class="weight-note">Answers that reflect your own understanding — even if imperfect — will be valued more than technically correct but copy-pasted ones.</p>
+</div>
+
+<form id="checkinForm">
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">·</span>Your Details</div>
+    <div class="identity-section">
+      <div class="question">
+        <label class="q-label" for="name">Full Name *</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="question">
+        <label class="q-label" for="usn">USN *</label>
+        <input type="text" id="usn" name="usn" required>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">1</span>Image Formation & Radiometry</div>
+    <p class="section-desc">The foundational layer everything else builds on — how a camera turns light into an image at all.</p>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q1.</span>The pinhole camera model assumes light passes through a single infinitesimally small point. Why can't a real camera actually use a true pinhole — what would you see if it tried?</label>
+      <textarea id="q1" name="q1" required></textarea>
+      <div class="warning" id="warn1">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q2.</span>Two different pixels in a photo show the same brightness value. Does that necessarily mean the two real-world surfaces they came from are reflecting the same amount of light? Why or why not?</label>
+      <textarea id="q2" name="q2" required></textarea>
+      <div class="warning" id="warn2">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q3.</span>A mirror and a piece of chalk both reflect light, but they look completely different. In one sentence, what does BRDF actually describe that explains this difference?</label>
+      <textarea id="q3" name="q3" required></textarea>
+      <div class="warning" id="warn3">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">2</span>Fundamentals</div>
+    <p class="section-desc">One core idea per topic — filtering, geometry, calibration, and SLAM.</p>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q4 (Filtering).</span>What's the actual difference between a filter used for restoration (like removing noise) and a filter used for feature extraction (like an edge detector)? They're both "filters" — what makes their purpose different?</label>
+      <textarea id="q4" name="q4" required></textarea>
+      <div class="warning" id="warn4">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q5 (Projective Geometry).</span>A camera takes a photo of a 3D scene and produces a flat 2D image. What information is fundamentally lost in that process, and why can't it be recovered from a single image alone?</label>
+      <textarea id="q5" name="q5" required></textarea>
+      <div class="warning" id="warn5">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q6 (Camera Models).</span>In plain terms, what does "camera calibration" actually determine about a camera — what are you solving for?</label>
+      <textarea id="q6" name="q6" required></textarea>
+      <div class="warning" id="warn6">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q7 (SLAM).</span>What does "SLAM" stand for, and why are the two halves of that name (the "SL" and the "M") actually a chicken-and-egg problem?</label>
+      <textarea id="q7" name="q7" required></textarea>
+      <div class="warning" id="warn7">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q8 (SLAM).</span>Why would a SLAM system specifically care about tracking the same physical point across multiple video frames, rather than just processing each frame independently?</label>
+      <textarea id="q8" name="q8" required></textarea>
+      <div class="warning" id="warn8">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">3</span>Cross-Topic Connectors</div>
+    <p class="section-desc">These need two earlier topics understood together, not separately. A hint is included to point you toward the right way to think about it — not to give away the answer.</p>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q9 (Filtering + Camera Models).</span>If a photo has heavy lens distortion (like the barrel effect), should you apply calibration correction before or after running noise-reduction filtering on it — and does the order actually matter?</label>
+      <div class="hint">Hint: think about what each step actually does to a pixel — one recomputes pixel values based on neighbors, the other recomputes pixel positions. Does doing one first change what the other has to work with?</div>
+      <textarea id="q9" name="q9" required></textarea>
+      <div class="warning" id="warn9">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q10 (Projective Geometry + SLAM).</span>Vanishing points (where parallel lines in the real world appear to converge in an image) show up naturally in hallway/railway-track photos. How could a SLAM system actually use a detected vanishing point, practically?</label>
+      <div class="hint">Hint: a vanishing point isn't just a visual curiosity — it encodes a direction. Ask yourself: whose direction is it describing, the scene's or the camera's?</div>
+      <textarea id="q10" name="q10" required></textarea>
+      <div class="warning" id="warn10">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">4</span>Image-Based Questions</div>
+    <p class="section-desc">Look at each image carefully before answering — the answer should reference what you actually see.</p>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q11 (Pinhole Model).</span>Below is a diagram of a pinhole camera with an object outside the box. Trace the ray path in your own words — why does the image on the back wall come out upside down?</label>
+      <img class="q-image" src="images/q_pinhole_diagram.png" alt="Pinhole camera ray diagram">
+      <textarea id="q11" name="q11" required></textarea>
+      <div class="warning" id="warn11">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q12 (Pinhole Model).</span>Below are two pinhole camera setups with the exact same object at the exact same distance from the pinhole — the only difference is the distance from the pinhole to the back wall (image plane). What effect does this have on the resulting image, and why?</label>
+      <img class="q-image" src="images/q_pinhole_distance_compare.png" alt="Pinhole distance comparison diagram">
+      <textarea id="q12" name="q12" required></textarea>
+      <div class="warning" id="warn12">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q13 (Filtering).</span>Below are two versions of the same image — one clean, one degraded. Describe what kind of degradation was applied, and name one filter/technique you'd use to reduce it.</label>
+      <img class="q-image" src="images/q_sharp_vs_blurred.png" alt="Sharp vs blurred comparison">
+      <textarea id="q13" name="q13" required></textarea>
+      <div class="warning" id="warn13">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q14 (Camera Models).</span>Below is a flat grid photographed with two different lens characteristics. Describe what's happening geometrically in the second image, and explain in your own words how camera calibration would address it.</label>
+      <img class="q-image" src="images/q_distortion_combo.png" alt="Lens distortion comparison">
+      <textarea id="q14" name="q14" required></textarea>
+      <div class="warning" id="warn14">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q15 (Projective Geometry).</span>What does the point where these lines converge represent, geometrically? If this were a real photo instead of a diagram, what real-world direction would that point correspond to?</label>
+      <img class="q-image" src="images/q_vanishing_point.png" alt="Vanishing point diagram">
+      <textarea id="q15" name="q15" required></textarea>
+      <div class="warning" id="warn15">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <button type="submit" id="submitBtn">Submit</button>
+  <div class="status" id="statusMsg"></div>
+</form>
+
+<script>
+  // Block paste, drag-drop text, and right-click context menu on all inputs/textareas
+  const fields = document.querySelectorAll('textarea, input[type="text"]');
+
+  fields.forEach(field => {
+    const warningEl = document.getElementById('warn' + field.id.replace('q', ''));
+
+    field.addEventListener('paste', (e) => {
+      e.preventDefault();
+      if (warningEl) {
+        warningEl.style.display = 'block';
+        setTimeout(() => warningEl.style.display = 'none', 2500);
+      }
+    });
+
+    field.addEventListener('drop', (e) => e.preventDefault());
+    field.addEventListener('contextmenu', (e) => e.preventDefault()); // blocks right-click paste
+  });
+
+  // ⚠️ REPLACE THIS with your own deployed Apps Script Web App URL (see hosting instructions)
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8TCHyELIqAZLeGI4B8szhtHa6QIOovrPMuQAx-9Y2Jd1AWWXGgNejDkacgSS7oRvM/exec";
+
+  document.getElementById('checkinForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMsg = document.getElementById('statusMsg');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+    statusMsg.style.color = '#666';
+    statusMsg.textContent = '';
+
+    try {
+      const payload = {
+        name: document.getElementById('name').value,
+        usn: document.getElementById('usn').value,
+        q1: document.getElementById('q1').value,
+        q2: document.getElementById('q2').value,
+        q3: document.getElementById('q3').value,
+        q4: document.getElementById('q4').value,
+        q5: document.getElementById('q5').value,
+        q6: document.getElementById('q6').value,
+        q7: document.getElementById('q7').value,
+        q8: document.getElementById('q8').value,
+        q9: document.getElementById('q9').value,
+        q10: document.getElementById('q10').value,
+        q11: document.getElementById('q11').value,
+        q12: document.getElementById('q12').value,
+        q13: document.getElementById('q13').value,
+        q14: document.getElementById('q14').value,
+        q15: document.getElementById('q15').value,
+        timestamp: new Date().toISOString()
+      };
+
+      const response = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'text/plain' } // avoids CORS preflight issues with Apps Script
+      });
+
+      const result = await response.json();
+
+      if (result.status === 'success') {
+        statusMsg.style.color = '#166534';
+        statusMsg.textContent = '✓ Submitted successfully.';
+        document.getElementById('checkinForm').reset();
+      } else {
+        throw new Error(result.message || 'Unknown error from server');
+      }
+    } catch (err) {
+      statusMsg.style.color = '#b3261e';
+      statusMsg.textContent = '✗ Submission failed: ' + err.message + '. Please try again — your answers are still in the form.';
+      console.error(err);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit';
+    }
+  });
+</script>
+
+</body>
+</html>

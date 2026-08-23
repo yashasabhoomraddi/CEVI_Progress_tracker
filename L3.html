@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ML Fundamentals — Week 1 Check-in</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+    color: #1c1c1c;
+    background: #fafafa;
+    line-height: 1.5;
+  }
+
+  .header { margin-bottom: 32px; }
+  h1 { font-size: 1.6rem; margin: 0 0 6px; }
+  .subtitle { font-size: 0.95rem; color: #555; margin: 0; }
+  .paste-note {
+    font-size: 0.82rem; color: #888; margin-top: 10px;
+    padding: 8px 12px; background: #fff;
+    border-left: 3px solid #ccc; border-radius: 4px;
+  }
+  .weight-note {
+    font-size: 0.85rem; color: #1e40af; margin-top: 8px;
+    padding: 8px 12px; background: #eff6ff;
+    border-left: 3px solid #2563eb; border-radius: 4px;
+  }
+
+  .section {
+    background: #fff; border: 1px solid #e5e5e5; border-radius: 10px;
+    padding: 24px 24px 8px; margin-bottom: 24px;
+  }
+  .section-title {
+    font-size: 1.05rem; font-weight: 700; color: #1a1a1a;
+    margin: 0 0 4px; display: flex; align-items: center; gap: 8px;
+  }
+  .section-number {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px; background: #2563eb; color: white;
+    border-radius: 50%; font-size: 0.8rem; font-weight: 700; flex-shrink: 0;
+  }
+  .section-desc {
+    font-size: 0.88rem; color: #666; margin: 0 0 20px; padding-left: 32px;
+  }
+
+  .question { margin-bottom: 26px; }
+  .q-label { display: block; font-weight: 600; font-size: 0.98rem; margin-bottom: 6px; }
+  .q-num { color: #2563eb; margin-right: 4px; }
+
+  .hint {
+    font-size: 0.85rem; font-style: italic; color: #555;
+    background: #f5f5f5; border-left: 3px solid #999;
+    padding: 8px 12px; border-radius: 4px; margin: 6px 0 10px;
+  }
+
+  .code-block {
+    background: #1e1e2e; color: #cdd6f4; font-family: 'SF Mono', Consolas, monospace;
+    font-size: 0.85rem; padding: 14px 16px; border-radius: 6px;
+    margin: 10px 0; overflow-x: auto; white-space: pre;
+  }
+
+  .q-image {
+    max-width: 100%; border: 1px solid #ddd; border-radius: 6px;
+    margin: 10px 0; display: block;
+  }
+
+  textarea, input[type="text"] {
+    width: 100%; padding: 10px 12px; font-size: 0.95rem;
+    border: 1px solid #d0d0d0; border-radius: 6px;
+    font-family: inherit; background: #fdfdfd;
+  }
+  textarea { min-height: 85px; resize: vertical; }
+  textarea:focus, input:focus { outline: none; border-color: #2563eb; background: #fff; }
+
+  .warning { display: none; color: #b3261e; font-size: 0.82rem; margin-top: 6px; }
+
+  .identity-section { display: flex; gap: 16px; }
+  .identity-section .question { flex: 1; margin-bottom: 0; }
+
+  button {
+    background: #2563eb; color: white; border: none; padding: 12px 28px;
+    border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; width: 100%;
+  }
+  button:hover { background: #1d4ed8; }
+  button:disabled { background: #94a3b8; cursor: not-allowed; }
+
+  .status { font-size: 0.9rem; margin-top: 12px; text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Machine Learning Fundamentals — Week 1 Check-in</h1>
+  <p class="subtitle">Regression · SVM/Trees/Ensembles · Unsupervised Learning · Neural Network Foundations & CNNs</p>
+  <p class="paste-note">Pasting is disabled on every field. Type your own answer directly.</p>
+  <p class="weight-note">Answers that reflect your own understanding — even if imperfect — will be valued more than technically correct but copy-pasted ones.</p>
+</div>
+
+<form id="checkinForm">
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">·</span>Your Details</div>
+    <div class="identity-section">
+      <div class="question">
+        <label class="q-label" for="name">Full Name *</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="question">
+        <label class="q-label" for="usn">USN *</label>
+        <input type="text" id="usn" name="usn" required>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">1</span>Regression</div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q1.</span>Linear regression finds a line that minimizes error on the training data. What does it actually mean for a line to "minimize error" — what is the model adjusting, and against what?</label>
+      <textarea id="q1" name="q1" required></textarea>
+      <div class="warning" id="warn1">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q2.</span>Why does gradient descent sometimes fail to converge (loss oscillates wildly or explodes) if the learning rate is too high — what's actually going wrong numerically?</label>
+      <textarea id="q2" name="q2" required></textarea>
+      <div class="warning" id="warn2">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q3.</span>What's the practical difference between using mean squared error as your loss function versus something like mean absolute error — when would one be clearly preferable?</label>
+      <textarea id="q3" name="q3" required></textarea>
+      <div class="warning" id="warn3">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">2</span>SVM, Trees, Ensembles</div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q4.</span>A Support Vector Machine tries to find a decision boundary with the "maximum margin." In plain terms, what is the margin, and why would maximizing it (rather than just finding any separating boundary) lead to better generalization on new data?</label>
+      <textarea id="q4" name="q4" required></textarea>
+      <div class="warning" id="warn4">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q5.</span>A single decision tree tends to overfit badly if grown deep enough. In plain terms, why does letting a tree grow very deep make it prone to memorizing the training data rather than learning general patterns?</label>
+      <textarea id="q5" name="q5" required></textarea>
+      <div class="warning" id="warn5">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q6.</span>What's the core idea behind ensemble methods (like random forests or gradient boosting) that makes combining many "weak" models often outperform one single strong model?</label>
+      <textarea id="q6" name="q6" required></textarea>
+      <div class="warning" id="warn6">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">3</span>Unsupervised Learning</div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q7.</span>What's the fundamental difference between clustering (like k-means) and dimensionality reduction (like PCA) — they're both "unsupervised," but what different kind of question is each one answering?</label>
+      <textarea id="q7" name="q7" required></textarea>
+      <div class="warning" id="warn7">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q8.</span>PCA (Principal Component Analysis) finds "directions of maximum variance" in the data. In plain terms, why does maximum variance correspond to the most useful/informative direction to keep?</label>
+      <textarea id="q8" name="q8" required></textarea>
+      <div class="warning" id="warn8">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q9.</span>K-means and hierarchical clustering both group data without labels, but hierarchical clustering doesn't require you to pick a number of clusters upfront the way k-means does. What does hierarchical clustering produce instead, that lets you defer that choice?</label>
+      <textarea id="q9" name="q9" required></textarea>
+      <div class="warning" id="warn9">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">4</span>Neural Network Foundations & CNNs</div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q10.</span>A single-layer neural network (no hidden layers, just inputs directly to output) is mathematically equivalent to a linear/logistic regression model. What does adding a hidden layer with a non-linear activation function actually give you that you didn't have before?</label>
+      <textarea id="q10" name="q10" required></textarea>
+      <div class="warning" id="warn10">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q11.</span>Why does a CNN use convolutional layers (small filters sliding across the image) instead of just connecting every pixel to every neuron, the way a standard fully-connected network would?</label>
+      <textarea id="q11" name="q11" required></textarea>
+      <div class="warning" id="warn11">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q12.</span>What does a pooling layer (like max pooling) actually do in a CNN, and why is throwing away information (down-sampling) in the middle of the network usually a good thing rather than a loss?</label>
+      <textarea id="q12" name="q12" required></textarea>
+      <div class="warning" id="warn12">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q13.</span>Backpropagation is how a neural network learns from its errors. In one or two sentences, what is backpropagation actually computing, and why does it need to work backward through the network (output layer to input layer) rather than forward?</label>
+      <textarea id="q13" name="q13" required></textarea>
+      <div class="warning" id="warn13">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q14.</span>When you actually train a model, choices like learning rate, batch size, and number of epochs typically aren't hardcoded inside the model's logic — they're usually set in a separate config (a YAML/JSON file, or arguments passed to a training script), read once at the start of the run.</label>
+      <div class="code-block"># example training config
+learning_rate: 0.001
+batch_size: 32
+num_epochs: 50
+weight_decay: 0.0001
+optimizer: adam</div>
+      <label class="q-label">Why keep these values separate from the model code at all, instead of just hardcoding them? And pick one value from the example above — what does it actually control during training?</label>
+      <textarea id="q14" name="q14" required></textarea>
+      <div class="warning" id="warn14">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">5</span>Cross-Topic Connectors</div>
+    <p class="section-desc">These need two earlier topics understood together, not separately. A hint is included to point you toward the right way to think about it — not to give away the answer.</p>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q15 (Regression + Neural Networks).</span>A single-layer neural network with no hidden layers and a sigmoid output is, in fact, mathematically identical to logistic regression. Given that, what does adding hidden layers actually buy you over classical logistic regression, using the same intuition from Q10?</label>
+      <div class="hint">Hint: think about what changes about the kinds of decision boundaries the model can now draw — is it still restricted to a straight line/plane, or not?</div>
+      <textarea id="q15" name="q15" required></textarea>
+      <div class="warning" id="warn15">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q16 (Ensembles + Overfitting).</span>A single deep decision tree overfits badly (Q5), but a random forest of many deep decision trees often does NOT overfit nearly as badly, even though each individual tree is still just as prone to overfitting on its own. How does averaging many overfit trees end up producing a model that generalizes reasonably well?</label>
+      <div class="hint">Hint: think about what "overfitting" actually looks like for a single tree — does every tree overfit in the exact same way, or differently each time? What happens to differing mistakes when you average them?</div>
+      <textarea id="q16" name="q16" required></textarea>
+      <div class="warning" id="warn16">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">6</span>Image-Based Questions</div>
+    <p class="section-desc">Look at each image carefully before answering — the answer should reference what you actually see.</p>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q17 (Regression).</span>Below are three regression models fit to the same noisy data. One underfits, one is a reasonable fit, and one overfits. Identify which is which, and explain what visual cue tells you.</label>
+      <img class="q-image" src="images/q_overfit_underfit.png" alt="Underfit, good fit, and overfit regression comparison">
+      <textarea id="q17" name="q17" required></textarea>
+      <div class="warning" id="warn17">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q18 (Neural Networks / Training).</span>Below is a training/validation loss curve over 50 epochs. At what point does something start to go wrong, and what is it?</label>
+      <img class="q-image" src="images/q_loss_curve.png" alt="Training and validation loss curve showing overfitting">
+      <textarea id="q18" name="q18" required></textarea>
+      <div class="warning" id="warn18">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q19 (Unsupervised Learning / PCA).</span>Below is a 2D scatter plot with two directions marked (red and green arrows). Which one is more likely to be the first principal component PCA would find, and why?</label>
+      <img class="q-image" src="images/q_pca_scatter.png" alt="Scatter plot with PCA principal axes marked">
+      <textarea id="q19" name="q19" required></textarea>
+      <div class="warning" id="warn19">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q20 (SVM / Trees).</span>Below are two classifiers' decision boundaries on the same dataset. One is a linear classifier, one is a decision tree. Identify which is which, and explain what feature of the boundary gave it away.</label>
+      <img class="q-image" src="images/q_decision_boundary.png" alt="Linear vs decision tree boundary comparison">
+      <textarea id="q20" name="q20" required></textarea>
+      <div class="warning" id="warn20">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <button type="submit" id="submitBtn">Submit</button>
+  <div class="status" id="statusMsg"></div>
+</form>
+
+<script>
+  // Block paste, drag-drop text, and right-click context menu on all inputs/textareas
+  const fields = document.querySelectorAll('textarea, input[type="text"]');
+
+  fields.forEach(field => {
+    const warningEl = document.getElementById('warn' + field.id.replace('q', ''));
+
+    field.addEventListener('paste', (e) => {
+      e.preventDefault();
+      if (warningEl) {
+        warningEl.style.display = 'block';
+        setTimeout(() => warningEl.style.display = 'none', 2500);
+      }
+    });
+
+    field.addEventListener('drop', (e) => e.preventDefault());
+    field.addEventListener('contextmenu', (e) => e.preventDefault()); // blocks right-click paste
+  });
+
+  // ⚠️ REPLACE THIS with your own deployed Apps Script Web App URL (see hosting instructions)
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8TCHyELIqAZLeGI4B8szhtHa6QIOovrPMuQAx-9Y2Jd1AWWXGgNejDkacgSS7oRvM/exec";
+
+  document.getElementById('checkinForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMsg = document.getElementById('statusMsg');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+    statusMsg.style.color = '#666';
+    statusMsg.textContent = '';
+
+    try {
+      const payload = {
+        name: document.getElementById('name').value,
+        usn: document.getElementById('usn').value
+      };
+      for (let i = 1; i <= 20; i++) {
+        payload["q" + i] = document.getElementById("q" + i).value;
+      }
+      payload.timestamp = new Date().toISOString();
+
+      const response = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'text/plain' } // avoids CORS preflight issues with Apps Script
+      });
+
+      const result = await response.json();
+
+      if (result.status === 'success') {
+        statusMsg.style.color = '#166534';
+        statusMsg.textContent = '✓ Submitted successfully.';
+        document.getElementById('checkinForm').reset();
+      } else {
+        throw new Error(result.message || 'Unknown error from server');
+      }
+    } catch (err) {
+      statusMsg.style.color = '#b3261e';
+      statusMsg.textContent = '✗ Submission failed: ' + err.message + '. Please try again — your answers are still in the form.';
+      console.error(err);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit';
+    }
+  });
+</script>
+
+</body>
+</html>

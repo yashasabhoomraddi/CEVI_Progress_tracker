@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GenAI & Transformers — Week 2 Check-in</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+    color: #1c1c1c;
+    background: #fafafa;
+    line-height: 1.5;
+  }
+
+  .header { margin-bottom: 32px; }
+  h1 { font-size: 1.6rem; margin: 0 0 6px; }
+  .subtitle { font-size: 0.95rem; color: #555; margin: 0; }
+  .paste-note {
+    font-size: 0.82rem; color: #888; margin-top: 10px;
+    padding: 8px 12px; background: #fff;
+    border-left: 3px solid #ccc; border-radius: 4px;
+  }
+  .weight-note {
+    font-size: 0.85rem; color: #1e40af; margin-top: 8px;
+    padding: 8px 12px; background: #eff6ff;
+    border-left: 3px solid #2563eb; border-radius: 4px;
+  }
+
+  .section {
+    background: #fff; border: 1px solid #e5e5e5; border-radius: 10px;
+    padding: 24px 24px 8px; margin-bottom: 24px;
+  }
+  .section-title {
+    font-size: 1.05rem; font-weight: 700; color: #1a1a1a;
+    margin: 0 0 4px; display: flex; align-items: center; gap: 8px;
+  }
+  .section-number {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px; background: #2563eb; color: white;
+    border-radius: 50%; font-size: 0.8rem; font-weight: 700; flex-shrink: 0;
+  }
+  .section-desc {
+    font-size: 0.88rem; color: #666; margin: 0 0 20px; padding-left: 32px;
+  }
+
+  .question { margin-bottom: 26px; }
+  .q-label { display: block; font-weight: 600; font-size: 0.98rem; margin-bottom: 6px; }
+  .q-num { color: #2563eb; margin-right: 4px; }
+
+  .math-note {
+    font-size: 0.85rem; color: #7c2d12; margin: 8px 0 10px;
+    padding: 8px 12px; background: #fff7ed;
+    border-left: 3px solid #ea580c; border-radius: 4px;
+  }
+
+  .q-image {
+    max-width: 100%; border: 1px solid #ddd; border-radius: 6px;
+    margin: 10px 0; display: block;
+  }
+
+  textarea, input[type="text"] {
+    width: 100%; padding: 10px 12px; font-size: 0.95rem;
+    border: 1px solid #d0d0d0; border-radius: 6px;
+    font-family: inherit; background: #fdfdfd;
+  }
+  textarea { min-height: 85px; resize: vertical; }
+  textarea:focus, input:focus { outline: none; border-color: #2563eb; background: #fff; }
+
+  .warning { display: none; color: #b3261e; font-size: 0.82rem; margin-top: 6px; }
+
+  .identity-section { display: flex; gap: 16px; }
+  .identity-section .question { flex: 1; margin-bottom: 0; }
+
+  button {
+    background: #2563eb; color: white; border: none; padding: 12px 28px;
+    border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; width: 100%;
+  }
+  button:hover { background: #1d4ed8; }
+  button:disabled { background: #94a3b8; cursor: not-allowed; }
+
+  .status { font-size: 0.9rem; margin-top: 12px; text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Generative AI & Transformers — Week 2 Check-in</h1>
+  <p class="subtitle">RNN/LSTM → Autoencoders → GANs → VAEs → Attention/Transformers</p>
+  <p class="paste-note">Pasting is disabled on every field. Type your own answer directly.</p>
+  <p class="weight-note">Answers that reflect your own understanding — even if imperfect — will be valued more than technically correct but copy-pasted ones.</p>
+</div>
+
+<form id="checkinForm">
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">·</span>Your Details</div>
+    <div class="identity-section">
+      <div class="question">
+        <label class="q-label" for="name">Full Name *</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="question">
+        <label class="q-label" for="usn">USN *</label>
+        <input type="text" id="usn" name="usn" required>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">1</span>RNNs & LSTMs</div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q1.</span>Before transformers, the standard way to process a sentence was word-by-word, in order, using a Recurrent Neural Network (RNN). In plain terms, what does "recurrent" mean here, and what gets passed from one word to the next as the network reads through a sentence?</label>
+      <div class="math-note">I realize it's hard to type down a formula, and I don't expect you to — but it will be to your benefit if you were to understand the math behind how the hidden state is actually computed at each step.</div>
+      <textarea id="q1" name="q1" required></textarea>
+      <div class="warning" id="warn1">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q2.</span>LSTMs (Long Short-Term Memory networks) were introduced specifically to fix a problem that plain RNNs have with long sentences. What goes wrong in a plain RNN over a long sequence, and what does an LSTM add to address it?</label>
+      <div class="math-note">I realize it's hard to type down a formula, and I don't expect you to — but it will be to your benefit if you were to understand the math behind how the input, forget, and output gates are actually computed.</div>
+      <textarea id="q2" name="q2" required></textarea>
+      <div class="warning" id="warn2">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">2</span>Autoencoders</div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q3.</span>What is an autoencoder, at a basic level — what two things is it made of, and what is it trained to do?</label>
+      <textarea id="q3" name="q3" required></textarea>
+      <div class="warning" id="warn3">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q4.</span>If you removed the compression step entirely — made the middle of the network the same size as the input, instead of smaller — the autoencoder could trivially achieve perfect reconstruction just by copying values straight through. Why would this version of the model be useless, even though it "solves" the task perfectly?</label>
+      <textarea id="q4" name="q4" required></textarea>
+      <div class="warning" id="warn4">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">3</span>Generative Adversarial Networks (GANs)</div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q5.</span>A GAN consists of two networks — a generator and a discriminator — trained against each other. In plain terms, what is each one trying to do, and why does training them against each other (rather than together toward the same goal) actually work?</label>
+      <textarea id="q5" name="q5" required></textarea>
+      <div class="warning" id="warn5">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q6.</span>GANs are notoriously unstable to train — sometimes the generator "wins" too early and stops improving, or training oscillates without ever converging well. Given how the two networks are set up against each other, why is this kind of instability a somewhat expected risk, not just an implementation bug?</label>
+      <textarea id="q6" name="q6" required></textarea>
+      <div class="warning" id="warn6">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">4</span>Variational Autoencoders (VAEs)</div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q7.</span>A VAE is built on the same encoder-bottleneck-decoder idea as a regular autoencoder, but with one key difference: instead of encoding an input into a single fixed point in the latent space, it encodes it into a distribution (a range of possible values). Why does this change make it possible to generate new, realistic data — something a regular autoencoder can't reliably do?</label>
+      <div class="math-note">I realize it's hard to type down a formula, and I don't expect you to — but it will be to your benefit if you were to understand the math behind how the latent distribution is shaped during training.</div>
+      <textarea id="q7" name="q7" required></textarea>
+      <div class="warning" id="warn7">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q8.</span>Both GANs and VAEs are generative models trained around the same era, but they take fundamentally different approaches to learning to generate realistic data. In one or two sentences, what's the core difference in how each one learns to produce realistic outputs?</label>
+      <textarea id="q8" name="q8" required></textarea>
+      <div class="warning" id="warn8">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">5</span>Attention & Transformers</div>
+    <p class="section-desc">The priority section this week — the goal is real intuition for why attention works the way it does, not just definitions.</p>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q9.</span>RNNs and LSTMs (Section 1) process sentences strictly one word at a time, in order. What specific limitation does this create for understanding a long sentence, that attention was designed to fix?</label>
+      <textarea id="q9" name="q9" required></textarea>
+      <div class="warning" id="warn9">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q10.</span>The core mechanism of attention is often summarized as computing "queries," "keys," and "values." Without using those exact technical terms, describe in plain, intuitive language what attention is actually doing when one word "attends to" another.</label>
+      <div class="math-note">I realize it's hard to type down a formula, and I don't expect you to — but it will be to your benefit if you were to understand the math behind how query, key, and value vectors are actually combined to compute attention weights.</div>
+      <textarea id="q10" name="q10" required></textarea>
+      <div class="warning" id="warn10">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q11.</span>Why does a transformer need positional encoding added to its input at all — what problem exists without it, given how attention itself works?</label>
+      <div class="math-note">I realize it's hard to type down a formula, and I don't expect you to — but it will be to your benefit if you were to understand the math behind how positional encodings are actually generated (e.g. the sine/cosine formulation).</div>
+      <textarea id="q11" name="q11" required></textarea>
+      <div class="warning" id="warn11">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q12.</span>Transformers use "multi-head" attention — running several attention computations in parallel rather than just one. What's the actual benefit of having multiple attention heads instead of one larger one?</label>
+      <textarea id="q12" name="q12" required></textarea>
+      <div class="warning" id="warn12">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q13.</span>Why are transformers generally much faster to train on modern hardware (GPUs) than the RNNs/LSTMs described in Section 1, given that both are processing sequences of words?</label>
+      <textarea id="q13" name="q13" required></textarea>
+      <div class="warning" id="warn13">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q14.</span>The decoder side of a transformer uses "masked" attention during training, which prevents a word from attending to words that come after it. Why is this masking specifically necessary for a model that's meant to generate text one word at a time?</label>
+      <textarea id="q14" name="q14" required></textarea>
+      <div class="warning" id="warn14">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">6</span>Diagram-Based Questions</div>
+    <p class="section-desc">Look at each image carefully before answering — the answer should reference what you actually see.</p>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q15 (RNN).</span>Below is a diagram of an RNN processing the sentence "The cat sat mat" one word at a time. Based on the diagram, what does the red "hidden state" arrow actually represent, and what would happen to the network's understanding of "mat" if that arrow were removed?</label>
+      <img class="q-image" src="images/q_rnn_diagram.png" alt="RNN sequential processing diagram">
+      <textarea id="q15" name="q15" required></textarea>
+      <div class="warning" id="warn15">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q16 (GANs).</span>Below is a diagram of a GAN's structure. Based on the arrows shown, trace what happens to a piece of random noise from the start of the diagram to the final "Real or Fake?" decision.</label>
+      <img class="q-image" src="images/q_gan_diagram.png" alt="GAN generator-discriminator loop diagram">
+      <textarea id="q16" name="q16" required></textarea>
+      <div class="warning" id="warn16">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q17 (Attention).</span>Below is an attention weight heatmap for the sentence "The cat sat on the mat," showing how strongly each word (rows) attends to every other word (columns). Look at the row for "sat" and the row for "on" specifically — what pattern do you notice, and does it make intuitive sense?</label>
+      <img class="q-image" src="images/q_attention_heatmap.png" alt="Attention weight heatmap">
+      <textarea id="q17" name="q17" required></textarea>
+      <div class="warning" id="warn17">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <button type="submit" id="submitBtn">Submit</button>
+  <div class="status" id="statusMsg"></div>
+</form>
+
+<script>
+  // Block paste, drag-drop text, and right-click context menu on all inputs/textareas
+  const fields = document.querySelectorAll('textarea, input[type="text"]');
+
+  fields.forEach(field => {
+    const warningEl = document.getElementById('warn' + field.id.replace('q', ''));
+
+    field.addEventListener('paste', (e) => {
+      e.preventDefault();
+      if (warningEl) {
+        warningEl.style.display = 'block';
+        setTimeout(() => warningEl.style.display = 'none', 2500);
+      }
+    });
+
+    field.addEventListener('drop', (e) => e.preventDefault());
+    field.addEventListener('contextmenu', (e) => e.preventDefault()); // blocks right-click paste
+  });
+
+  // ⚠️ REPLACE THIS with your own deployed Apps Script Web App URL (see hosting instructions)
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8TCHyELIqAZLeGI4B8szhtHa6QIOovrPMuQAx-9Y2Jd1AWWXGgNejDkacgSS7oRvM/exec";
+
+  document.getElementById('checkinForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMsg = document.getElementById('statusMsg');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+    statusMsg.style.color = '#666';
+    statusMsg.textContent = '';
+
+    try {
+      const payload = {
+        name: document.getElementById('name').value,
+        usn: document.getElementById('usn').value
+      };
+      for (let i = 1; i <= 17; i++) {
+        payload["q" + i] = document.getElementById("q" + i).value;
+      }
+      payload.timestamp = new Date().toISOString();
+
+      const response = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'text/plain' } // avoids CORS preflight issues with Apps Script
+      });
+
+      const result = await response.json();
+
+      if (result.status === 'success') {
+        statusMsg.style.color = '#166534';
+        statusMsg.textContent = '✓ Submitted successfully.';
+        document.getElementById('checkinForm').reset();
+      } else {
+        throw new Error(result.message || 'Unknown error from server');
+      }
+    } catch (err) {
+      statusMsg.style.color = '#b3261e';
+      statusMsg.textContent = '✗ Submission failed: ' + err.message + '. Please try again — your answers are still in the form.';
+      console.error(err);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit';
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Diffusion, LLM Evolution & Multimodal — Week 3 Check-in</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+    color: #1c1c1c;
+    background: #fafafa;
+    line-height: 1.5;
+  }
+
+  .header { margin-bottom: 32px; }
+  h1 { font-size: 1.6rem; margin: 0 0 6px; }
+  .subtitle { font-size: 0.95rem; color: #555; margin: 0; }
+  .paste-note {
+    font-size: 0.82rem; color: #888; margin-top: 10px;
+    padding: 8px 12px; background: #fff;
+    border-left: 3px solid #ccc; border-radius: 4px;
+  }
+  .weight-note {
+    font-size: 0.85rem; color: #1e40af; margin-top: 8px;
+    padding: 8px 12px; background: #eff6ff;
+    border-left: 3px solid #2563eb; border-radius: 4px;
+  }
+
+  .section {
+    background: #fff; border: 1px solid #e5e5e5; border-radius: 10px;
+    padding: 24px 24px 8px; margin-bottom: 24px;
+  }
+  .section-title {
+    font-size: 1.05rem; font-weight: 700; color: #1a1a1a;
+    margin: 0 0 4px; display: flex; align-items: center; gap: 8px;
+  }
+  .section-number {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px; background: #2563eb; color: white;
+    border-radius: 50%; font-size: 0.8rem; font-weight: 700; flex-shrink: 0;
+  }
+  .section-desc {
+    font-size: 0.88rem; color: #666; margin: 0 0 20px; padding-left: 32px;
+  }
+
+  .question { margin-bottom: 26px; }
+  .q-label { display: block; font-weight: 600; font-size: 0.98rem; margin-bottom: 6px; }
+  .q-num { color: #2563eb; margin-right: 4px; }
+
+  .math-note {
+    font-size: 0.85rem; color: #7c2d12; margin: 8px 0 10px;
+    padding: 8px 12px; background: #fff7ed;
+    border-left: 3px solid #ea580c; border-radius: 4px;
+  }
+
+  .q-image {
+    max-width: 100%; border: 1px solid #ddd; border-radius: 6px;
+    margin: 10px 0; display: block;
+  }
+
+  textarea, input[type="text"] {
+    width: 100%; padding: 10px 12px; font-size: 0.95rem;
+    border: 1px solid #d0d0d0; border-radius: 6px;
+    font-family: inherit; background: #fdfdfd;
+  }
+  textarea { min-height: 85px; resize: vertical; }
+  textarea:focus, input:focus { outline: none; border-color: #2563eb; background: #fff; }
+
+  .warning { display: none; color: #b3261e; font-size: 0.82rem; margin-top: 6px; }
+
+  .identity-section { display: flex; gap: 16px; }
+  .identity-section .question { flex: 1; margin-bottom: 0; }
+
+  .transition-block {
+    background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;
+    padding: 18px 18px 6px; margin-bottom: 20px;
+  }
+  .transition-title {
+    font-weight: 700; font-size: 0.95rem; color: #1e40af; margin-bottom: 12px;
+  }
+  .transition-sub {
+    font-size: 0.9rem; font-weight: 500; margin-bottom: 6px; color: #333;
+  }
+
+  button {
+    background: #2563eb; color: white; border: none; padding: 12px 28px;
+    border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; width: 100%;
+  }
+  button:hover { background: #1d4ed8; }
+  button:disabled { background: #94a3b8; cursor: not-allowed; }
+
+  .status { font-size: 0.9rem; margin-top: 12px; text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Diffusion Models, LLM Evolution & Multimodal — Week 3 Check-in</h1>
+  <p class="subtitle">Diffusion Models → LLM Evolution & Multimodal (CLIP) → Full Timeline</p>
+  <p class="paste-note">Pasting is disabled on every field. Type your own answer directly.</p>
+  <p class="weight-note">Answers that reflect your own understanding — even if imperfect — will be valued more than technically correct but copy-pasted ones.</p>
+</div>
+
+<form id="checkinForm">
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">·</span>Your Details</div>
+    <div class="identity-section">
+      <div class="question">
+        <label class="q-label" for="name">Full Name *</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="question">
+        <label class="q-label" for="usn">USN *</label>
+        <input type="text" id="usn" name="usn" required>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">1</span>Diffusion Models</div>
+    <p class="section-desc">Goes beyond noising/denoising alone — the goal is real intuition for why the process works the way it does.</p>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q1.</span>Diffusion models work by first taking a real image and gradually adding random noise to it over many steps, until it becomes pure noise — then training a network to reverse this process. Why train a model on the "add noise" direction at all, when the actual goal is generating new images (the "remove noise" direction)?</label>
+      <textarea id="q1" name="q1" required></textarea>
+      <div class="warning" id="warn1">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q2.</span>At each step of the reverse (denoising) process, the model doesn't produce a final clean image directly — it only predicts a small amount of noise to remove. Why take many small steps instead of trying to jump straight from pure noise to a finished image in one shot?</label>
+      <textarea id="q2" name="q2" required></textarea>
+      <div class="warning" id="warn2">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q3.</span>The forward noising process at each step is often written roughly as: <em>new image = (some amount of original signal) + (some amount of random noise)</em>, with the balance shifting more toward noise at each successive step. Given this, why does the very first noising step (barely any noise added yet) produce a very easy prediction task for the reverse model, while the last step (almost pure noise) produces a very hard one?</label>
+      <div class="math-note">I realize it's hard to type down a formula, and I don't expect you to — but it will be to your benefit if you were to understand the math behind how the noise schedule (the exact balance between signal and noise at each step) is actually defined.</div>
+      <textarea id="q3" name="q3" required></textarea>
+      <div class="warning" id="warn3">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">2</span>LLM Evolution & Multimodal Models</div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q4.</span>Modern large language models are, at their architectural core, still built from the transformer architecture. What actually changed to take a transformer from something that translates a sentence to something like a modern chatbot — is it a fundamentally different architecture, or something else?</label>
+      <textarea id="q4" name="q4" required></textarea>
+      <div class="warning" id="warn4">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q5.</span>LLM training is usually split into two distinct stages: pretraining (on massive amounts of general, unlabeled text) followed by fine-tuning (on a much smaller, more specific set of instruction-following examples). Why go through this two-stage process instead of just training directly on the end task from the start?</label>
+      <textarea id="q5" name="q5" required></textarea>
+      <div class="warning" id="warn5">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q6.</span>RLHF (Reinforcement Learning from Human Feedback) is commonly used after fine-tuning to further shape a model's responses. In plain terms, what problem does RLHF address that plain fine-tuning on example conversations doesn't fully solve?</label>
+      <textarea id="q6" name="q6" required></textarea>
+      <div class="warning" id="warn6">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q7.</span>CLIP is trained on images and their text captions together, learning to match them — rather than being trained to classify images into fixed predefined categories the way older image classifiers were. What real capability does this training approach unlock that a traditional fixed-category classifier doesn't have?</label>
+      <textarea id="q7" name="q7" required></textarea>
+      <div class="warning" id="warn7">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q8.</span>CLIP's shared image-text representation space is also what makes modern text-to-image generation models possible. In plain terms, why would a text-to-image model need something like CLIP's image-text matching ability as a component, rather than just being a diffusion model on its own?</label>
+      <textarea id="q8" name="q8" required></textarea>
+      <div class="warning" id="warn8">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">3</span>The Full Timeline</div>
+    <p class="section-desc">Below is a timeline from the very first neural network model to today's frontier models. Look at the diagram, then fill in each transition below describing what changed and why.</p>
+    <img class="q-image" src="images/q_timeline_diagram.png" alt="Timeline from SLP to current frontier models">
+
+    <div class="transition-block">
+      <div class="transition-title">1 → 2: SLP → MLP</div>
+      <div class="transition-sub">What was the key limitation of the Single-Layer Perceptron?</div>
+      <textarea id="t1a" name="t1a" required></textarea>
+      <div class="warning" id="warnt1a">Pasting isn't allowed here — please type your answer.</div>
+      <div class="transition-sub" style="margin-top:14px;">What did the Multi-Layer Perceptron add to address it?</div>
+      <textarea id="t1b" name="t1b" required></textarea>
+      <div class="warning" id="warnt1b">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="transition-block">
+      <div class="transition-title">2 → 3: MLP → CNN</div>
+      <div class="transition-sub">What was inefficient about using a plain MLP on image data?</div>
+      <textarea id="t2a" name="t2a" required></textarea>
+      <div class="warning" id="warnt2a">Pasting isn't allowed here — please type your answer.</div>
+      <div class="transition-sub" style="margin-top:14px;">What did the CNN add to address it?</div>
+      <textarea id="t2b" name="t2b" required></textarea>
+      <div class="warning" id="warnt2b">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="transition-block">
+      <div class="transition-title">3 → 4: CNN → RNN/LSTM</div>
+      <div class="transition-sub">What kind of data does a CNN struggle to handle well?</div>
+      <textarea id="t3a" name="t3a" required></textarea>
+      <div class="warning" id="warnt3a">Pasting isn't allowed here — please type your answer.</div>
+      <div class="transition-sub" style="margin-top:14px;">What did RNN/LSTM add to address it?</div>
+      <textarea id="t3b" name="t3b" required></textarea>
+      <div class="warning" id="warnt3b">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="transition-block">
+      <div class="transition-title">4 → 5: RNN/LSTM → Transformer</div>
+      <div class="transition-sub">What was the core limitation of RNN/LSTM, even with gating mechanisms?</div>
+      <textarea id="t4a" name="t4a" required></textarea>
+      <div class="warning" id="warnt4a">Pasting isn't allowed here — please type your answer.</div>
+      <div class="transition-sub" style="margin-top:14px;">What did the Transformer add to address it?</div>
+      <textarea id="t4b" name="t4b" required></textarea>
+      <div class="warning" id="warnt4b">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="transition-block">
+      <div class="transition-title">5 → 6: Transformer → LLMs (GPT/BERT-era)</div>
+      <div class="transition-sub">What was still missing after the original Transformer paper (which was built for translation)?</div>
+      <textarea id="t5a" name="t5a" required></textarea>
+      <div class="warning" id="warnt5a">Pasting isn't allowed here — please type your answer.</div>
+      <div class="transition-sub" style="margin-top:14px;">What changed to produce modern general-purpose LLMs?</div>
+      <textarea id="t5b" name="t5b" required></textarea>
+      <div class="warning" id="warnt5b">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="transition-block">
+      <div class="transition-title">6 → 7: LLMs → Diffusion Models / CLIP</div>
+      <div class="transition-sub">What could text-only LLMs not do, that Diffusion/CLIP-era models addressed?</div>
+      <textarea id="t6a" name="t6a" required></textarea>
+      <div class="warning" id="warnt6a">Pasting isn't allowed here — please type your answer.</div>
+      <div class="transition-sub" style="margin-top:14px;">What did this generation of models add?</div>
+      <textarea id="t6b" name="t6b" required></textarea>
+      <div class="warning" id="warnt6b">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="transition-block">
+      <div class="transition-title">7 → 8: Diffusion/CLIP → Current Frontier Models</div>
+      <div class="transition-sub">What is the current frontier generation of models generally moving toward, relative to the previous generation?</div>
+      <textarea id="t7a" name="t7a" required></textarea>
+      <div class="warning" id="warnt7a">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <button type="submit" id="submitBtn">Submit</button>
+  <div class="status" id="statusMsg"></div>
+</form>
+
+<script>
+  // Block paste, drag-drop text, and right-click context menu on all inputs/textareas
+  const fields = document.querySelectorAll('textarea, input[type="text"]');
+
+  fields.forEach(field => {
+    const warningEl = document.getElementById('warn' + field.id);
+
+    field.addEventListener('paste', (e) => {
+      e.preventDefault();
+      if (warningEl) {
+        warningEl.style.display = 'block';
+        setTimeout(() => warningEl.style.display = 'none', 2500);
+      }
+    });
+
+    field.addEventListener('drop', (e) => e.preventDefault());
+    field.addEventListener('contextmenu', (e) => e.preventDefault()); // blocks right-click paste
+  });
+
+  // ⚠️ REPLACE THIS with your own deployed Apps Script Web App URL (see hosting instructions)
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8TCHyELIqAZLeGI4B8szhtHa6QIOovrPMuQAx-9Y2Jd1AWWXGgNejDkacgSS7oRvM/exec";
+
+  const QUESTION_IDS = ["q1","q2","q3","q4","q5","q6","q7","q8",
+    "t1a","t1b","t2a","t2b","t3a","t3b","t4a","t4b","t5a","t5b","t6a","t6b","t7a"];
+
+  document.getElementById('checkinForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMsg = document.getElementById('statusMsg');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+    statusMsg.style.color = '#666';
+    statusMsg.textContent = '';
+
+    try {
+      const payload = {
+        name: document.getElementById('name').value,
+        usn: document.getElementById('usn').value
+      };
+      QUESTION_IDS.forEach(id => {
+        payload[id] = document.getElementById(id).value;
+      });
+      payload.timestamp = new Date().toISOString();
+
+      const response = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'text/plain' } // avoids CORS preflight issues with Apps Script
+      });
+
+      const result = await response.json();
+
+      if (result.status === 'success') {
+        statusMsg.style.color = '#166534';
+        statusMsg.textContent = '✓ Submitted successfully.';
+        document.getElementById('checkinForm').reset();
+      } else {
+        throw new Error(result.message || 'Unknown error from server');
+      }
+    } catch (err) {
+      statusMsg.style.color = '#b3261e';
+      statusMsg.textContent = '✗ Submission failed: ' + err.message + '. Please try again — your answers are still in the form.';
+      console.error(err);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit';
+    }
+  });
+</script>
+
+</body>
+</html>

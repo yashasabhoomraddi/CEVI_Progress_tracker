@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>3D Computer Vision — Week 3 Check-in</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+    color: #1c1c1c;
+    background: #fafafa;
+    line-height: 1.5;
+  }
+
+  .header { margin-bottom: 32px; }
+  h1 { font-size: 1.6rem; margin: 0 0 6px; }
+  .subtitle { font-size: 0.9rem; color: #555; margin: 0; }
+  .paste-note {
+    font-size: 0.82rem; color: #888; margin-top: 10px;
+    padding: 8px 12px; background: #fff;
+    border-left: 3px solid #ccc; border-radius: 4px;
+  }
+  .weight-note {
+    font-size: 0.85rem; color: #1e40af; margin-top: 8px;
+    padding: 8px 12px; background: #eff6ff;
+    border-left: 3px solid #2563eb; border-radius: 4px;
+  }
+
+  .section {
+    background: #fff; border: 1px solid #e5e5e5; border-radius: 10px;
+    padding: 24px 24px 8px; margin-bottom: 24px;
+  }
+  .section-title {
+    font-size: 1.05rem; font-weight: 700; color: #1a1a1a;
+    margin: 0 0 4px; display: flex; align-items: center; gap: 8px;
+  }
+  .section-number {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px; background: #2563eb; color: white;
+    border-radius: 50%; font-size: 0.8rem; font-weight: 700; flex-shrink: 0;
+  }
+  .section-desc {
+    font-size: 0.85rem; color: #666; margin: 0 0 20px; padding-left: 32px;
+  }
+
+  .question { margin-bottom: 26px; }
+  .q-label { display: block; font-weight: 600; font-size: 0.98rem; margin-bottom: 6px; }
+  .q-num { color: #2563eb; margin-right: 4px; }
+
+  .q-image {
+    max-width: 100%; border: 1px solid #ddd; border-radius: 6px;
+    margin: 10px 0; display: block;
+  }
+
+  textarea, input[type="text"] {
+    width: 100%; padding: 10px 12px; font-size: 0.95rem;
+    border: 1px solid #d0d0d0; border-radius: 6px;
+    font-family: inherit; background: #fdfdfd;
+  }
+  textarea { min-height: 85px; resize: vertical; }
+  textarea:focus, input:focus { outline: none; border-color: #2563eb; background: #fff; }
+
+  .warning { display: none; color: #b3261e; font-size: 0.82rem; margin-top: 6px; }
+
+  .identity-section { display: flex; gap: 16px; }
+  .identity-section .question { flex: 1; margin-bottom: 0; }
+
+  button {
+    background: #2563eb; color: white; border: none; padding: 12px 28px;
+    border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; width: 100%;
+  }
+  button:hover { background: #1d4ed8; }
+  button:disabled { background: #94a3b8; cursor: not-allowed; }
+
+  .status { font-size: 0.9rem; margin-top: 12px; text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>3D Computer Vision — Week 3 Check-in</h1>
+  <p class="subtitle">Sensing → Point Clouds/Voxels → Mesh DL → Implicit Surfaces → Reconstruction → Rendering → NeRF/Gaussian Splatting → SMPL → Animation/Garment</p>
+  <p class="paste-note">Pasting is disabled on every field. Type your own answer directly.</p>
+  <p class="weight-note">Answers that reflect your own understanding — even if imperfect — will be valued more than technically correct but copy-pasted ones.</p>
+</div>
+
+<form id="checkinForm">
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">·</span>Your Details</div>
+    <div class="identity-section">
+      <div class="question">
+        <label class="q-label" for="name">Full Name *</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="question">
+        <label class="q-label" for="usn">USN *</label>
+        <input type="text" id="usn" name="usn" required>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">1</span>3D Sensing & Representation</div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q1.</span>You're choosing a sensor to scan a shiny metal object versus a matte cardboard box. Structured light projects a known pattern and measures how it deforms; stereo vision triangulates from two camera views using matched features. Which method would likely struggle more with the shiny object, and why?</label>
+      <textarea id="q1" name="q1" required></textarea>
+      <div class="warning" id="warn1">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q2.</span>Time-of-Flight (ToF) sensors measure depth by timing how long light takes to bounce back from a surface. What would you expect to happen to a ToF sensor's accuracy on a glass window, and why?</label>
+      <textarea id="q2" name="q2" required></textarea>
+      <div class="warning" id="warn2">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">2</span>Geometry Processing — Point Clouds, Voxels</div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q3.</span>You have a raw point cloud of one million points and need to repeatedly find "the 20 nearest points" to a given query point, many times over. Doing this by checking distance to all one million points every single query would be extremely slow. What kind of data structure is typically built ahead of time to make this fast, and what's the core idea behind how it speeds things up?</label>
+      <textarea id="q3" name="q3" required></textarea>
+      <div class="warning" id="warn3">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q4.</span>A point cloud and a voxel grid can represent the exact same 3D scan. If you needed to run a standard 3D convolution (like a direct 3D extension of a 2D image convolution) on the data, which representation would that operation naturally apply to, and why would the other one need extra work first?</label>
+      <textarea id="q4" name="q4" required></textarea>
+      <div class="warning" id="warn4">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">3</span>Deep Learning on Meshes</div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q5.</span>A 2D image has an obvious, fixed neighborhood structure — every pixel has exactly 4 or 8 neighbors, always in the same relative positions. A mesh (vertices connected by edges into faces) does not have this — a vertex might have 4 neighbors, or 9, depending on the local mesh structure. Why does this difference make directly applying a standard CNN to a mesh fundamentally awkward?</label>
+      <textarea id="q5" name="q5" required></textarea>
+      <div class="warning" id="warn5">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q6.</span>MeshCNN operates on mesh edges rather than vertices or faces, and uses "edge collapse" as its pooling operation (analogous to how a CNN uses max pooling to shrink an image). Why might defining operations on edges specifically be a reasonable design choice for a mesh, compared to designing around vertices?</label>
+      <textarea id="q6" name="q6" required></textarea>
+      <div class="warning" id="warn6">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">4</span>Deep Learning on Implicit Surfaces</div>
+    <p class="section-desc">Priority section — representing shape as a continuous function rather than explicit geometry.</p>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q7.</span>A mesh explicitly stores a fixed set of vertices and faces — the resolution is baked in at creation time. An implicit surface (like an Occupancy Network) instead represents shape as a function that takes any 3D coordinate and outputs "inside" or "outside" the object. What real advantage does this function-based approach give you that a fixed mesh doesn't?</label>
+      <textarea id="q7" name="q7" required></textarea>
+      <div class="warning" id="warn7">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q8.</span>PIFu (Pixel-aligned Implicit Function) reconstructs a clothed 3D human from a single 2D image by aligning implicit surface predictions with pixel-level image features. Why does "pixel-aligned" matter here — what would likely go wrong if the 3D prediction at a given point wasn't tied to the specific image pixels covering that region of the body?</label>
+      <textarea id="q8" name="q8" required></textarea>
+      <div class="warning" id="warn8">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q9.</span>Occupancy Networks and PIFu are both implicit-surface methods, but PIFu specifically conditions its predictions on 2D image pixels, while a general Occupancy Network can be conditioned on other inputs entirely (like a point cloud or a latent code). Given this, why is PIFu specifically well-suited to the single-image human digitization problem, while a generic Occupancy Network might not be, without modification?</label>
+      <textarea id="q9" name="q9" required></textarea>
+      <div class="warning" id="warn9">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q10.</span>Below are three different representations of roughly the same 3D shape: a scattered set of individual points, a grid of small connected cubes, and a smooth connected surface. Match each representation to its likely underlying data structure (point cloud, voxel grid, or mesh), and identify which one is the odd one out in terms of memory scaling as resolution increases.</label>
+      <img class="q-image" src="images/q_representations_compare.png" alt="Point cloud vs voxel grid vs mesh comparison">
+      <textarea id="q10" name="q10" required></textarea>
+      <div class="warning" id="warn10">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">5</span>3D Reconstruction</div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q11.</span>Structure from Motion (SfM) reconstructs a 3D scene from a series of overlapping 2D photos, typically taken by moving a single camera around the scene. What would happen to SfM's ability to reconstruct a scene if all the input photos were taken from nearly the exact same camera position, just rotated slightly?</label>
+      <textarea id="q11" name="q11" required></textarea>
+      <div class="warning" id="warn11">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q12.</span>COLMAP-style Structure from Motion and Multi-View Stereo (MVS) are often described as a two-stage pipeline: SfM first, then MVS. SfM produces a sparse set of 3D points and camera poses; MVS then produces a much denser reconstruction. Why does it make sense to solve the sparse, easier problem before attempting the dense one, rather than trying to densely reconstruct everything from the start?</label>
+      <textarea id="q12" name="q12" required></textarea>
+      <div class="warning" id="warn12">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">6</span>3D Rendering Basics</div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q13.</span>Below are two different rendering approaches applied to a 3D scene. One works by projecting 3D geometry onto the screen and filling in the resulting shape; the other works by shooting a ray from the camera through each screen pixel and checking what it hits in the scene. Identify which is which, and explain which one would more naturally handle realistic reflections and shadows, and why.</label>
+      <img class="q-image" src="images/q_render_methods.png" alt="Rasterization vs ray tracing comparison">
+      <textarea id="q13" name="q13" required></textarea>
+      <div class="warning" id="warn13">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q14.</span>PyTorch3D is described as a "differentiable" rendering library. What does it mean for a renderer to be differentiable, and why would that property matter for a machine learning pipeline specifically, compared to a standard (non-differentiable) renderer?</label>
+      <textarea id="q14" name="q14" required></textarea>
+      <div class="warning" id="warn14">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">7</span>NeRF & 3D Gaussian Splatting</div>
+    <p class="section-desc">Priority section — the current dominant paradigm for photorealistic novel-view synthesis.</p>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q15.</span>A NeRF represents a scene as a neural network that, given any 3D point and viewing direction, predicts a color and density at that point — there's no explicit mesh or point cloud stored anywhere. Given this, what does it actually mean to "render an image" from a trained NeRF, if there's no explicit geometry to project or trace rays against in the usual sense?</label>
+      <textarea id="q15" name="q15" required></textarea>
+      <div class="warning" id="warn15">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q16.</span>Below is a diagram showing a single camera ray passing through a soft, cloud-like learned volume. Multiple sample points are marked along the ray. Based on this diagram, why would sampling only 2-3 points along the ray (instead of the 9 shown) likely produce a worse rendered image?</label>
+      <img class="q-image" src="images/q_nerf_diagram.png" alt="NeRF ray sampling diagram">
+      <textarea id="q16" name="q16" required></textarea>
+      <div class="warning" id="warn16">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q17.</span>3D Gaussian Splatting represents a scene as a large collection of explicit, positioned 3D Gaussian "blobs" (each with its own position, size, orientation, and color), rather than a single implicit neural function like NeRF. Given that both aim to reproduce photorealistic novel views, what's the practical rendering advantage of having explicit, positioned primitives instead of an implicit function that must be repeatedly queried along rays?</label>
+      <textarea id="q17" name="q17" required></textarea>
+      <div class="warning" id="warn17">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q18.</span>Both NeRF and 3D Gaussian Splatting are typically trained using a set of 2D photos of a scene taken from different known viewpoints, with no explicit 3D ground truth ever provided. What does this training process actually optimize, if there's no 3D "correct answer" available to compare against directly?</label>
+      <textarea id="q18" name="q18" required></textarea>
+      <div class="warning" id="warn18">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">8</span>SMPL & Body Models</div>
+    <p class="section-desc">Priority section.</p>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q19.</span>SMPL represents a human body using a relatively small number of parameters — roughly 10 "shape" parameters (controlling body proportions) and a set of "pose" parameters (controlling joint rotations). Why is this compact, parametric approach useful compared to just storing a raw, unparameterized mesh of the body directly?</label>
+      <textarea id="q19" name="q19" required></textarea>
+      <div class="warning" id="warn19">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q20.</span>SMPL-X extends SMPL by adding detailed hands and facial expression parameters on top of the base body model. Why would you expect the additional parameters needed for realistic hand and face detail to be a relatively small addition on top of the existing body parameters, rather than requiring an entirely separate, equally large model?</label>
+      <textarea id="q20" name="q20" required></textarea>
+      <div class="warning" id="warn20">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q21.</span>SMPL's pose parameters work by rotating body parts at defined joints, similar to a skeleton — but the actual body surface (skin, muscle, fat) needs to deform smoothly and realistically as a result, not just as rigid disconnected pieces. What real-world visual problem would you expect if the body mesh simply rotated as rigid pieces around each joint, with no additional deformation modeling?</label>
+      <textarea id="q21" name="q21" required></textarea>
+      <div class="warning" id="warn21">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="section-number">9</span>3D Animation — Skinning, Rigging & Garment Simulation</div>
+    <p class="section-desc">Priority section.</p>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q22.</span>Below is a body mesh (gray) with an underlying skeleton overlaid (red bones, blue joints). Based on this diagram, if the right elbow joint rotates, which parts of the gray mesh should move as a result, and which should ideally stay unaffected?</label>
+      <img class="q-image" src="images/q_skinning_diagram.png" alt="Body mesh with underlying skeleton diagram">
+      <textarea id="q22" name="q22" required></textarea>
+      <div class="warning" id="warn22">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q23.</span>Linear Blend Skinning (LBS) computes each vertex's final position as a weighted average of how it would move under each nearby joint's rotation, blended by influence weights. Near a joint like the elbow, a vertex might be influenced significantly by both the upper-arm bone and the forearm bone. Why does blending between multiple joint influences (rather than assigning each vertex to exactly one single joint) produce smoother-looking deformation at the joint?</label>
+      <textarea id="q23" name="q23" required></textarea>
+      <div class="warning" id="warn23">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q24.</span>Inverse Kinematics (IK) solves a different problem than the "forward" joint rotation described in Q22/Q23: instead of specifying each joint's rotation and computing where the hand ends up, IK specifies where you want the hand to end up, and solves backward for what joint rotations would achieve that. Why is this backward problem generally harder and more ambiguous than the forward version?</label>
+      <textarea id="q24" name="q24" required></textarea>
+      <div class="warning" id="warn24">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+
+    <div class="question">
+      <label class="q-label"><span class="q-num">Q25.</span>Garment simulation (like mass-spring cloth models) needs to handle the fact that clothing doesn't rigidly follow the body's skeleton the way skin does — a loose shirt should hang, fold, and move somewhat independently of the exact body pose underneath it. Why would applying the same skinning approach used for a body mesh (Q22/Q23) directly to a garment mesh generally produce unrealistic-looking results?</label>
+      <textarea id="q25" name="q25" required></textarea>
+      <div class="warning" id="warn25">Pasting isn't allowed here — please type your answer.</div>
+    </div>
+  </div>
+
+  <button type="submit" id="submitBtn">Submit</button>
+  <div class="status" id="statusMsg"></div>
+</form>
+
+<script>
+  // Block paste, drag-drop text, and right-click context menu on all inputs/textareas
+  const fields = document.querySelectorAll('textarea, input[type="text"]');
+
+  fields.forEach(field => {
+    const warningEl = document.getElementById('warn' + field.id.replace('q', ''));
+
+    field.addEventListener('paste', (e) => {
+      e.preventDefault();
+      if (warningEl) {
+        warningEl.style.display = 'block';
+        setTimeout(() => warningEl.style.display = 'none', 2500);
+      }
+    });
+
+    field.addEventListener('drop', (e) => e.preventDefault());
+    field.addEventListener('contextmenu', (e) => e.preventDefault()); // blocks right-click paste
+  });
+
+  // ⚠️ REPLACE THIS with your own deployed Apps Script Web App URL (see hosting instructions)
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8TCHyELIqAZLeGI4B8szhtHa6QIOovrPMuQAx-9Y2Jd1AWWXGgNejDkacgSS7oRvM/exec";
+
+  document.getElementById('checkinForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMsg = document.getElementById('statusMsg');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+    statusMsg.style.color = '#666';
+    statusMsg.textContent = '';
+
+    try {
+      const payload = {
+        name: document.getElementById('name').value,
+        usn: document.getElementById('usn').value
+      };
+      for (let i = 1; i <= 25; i++) {
+        payload["q" + i] = document.getElementById("q" + i).value;
+      }
+      payload.timestamp = new Date().toISOString();
+
+      const response = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'text/plain' } // avoids CORS preflight issues with Apps Script
+      });
+
+      const result = await response.json();
+
+      if (result.status === 'success') {
+        statusMsg.style.color = '#166534';
+        statusMsg.textContent = '✓ Submitted successfully.';
+        document.getElementById('checkinForm').reset();
+      } else {
+        throw new Error(result.message || 'Unknown error from server');
+      }
+    } catch (err) {
+      statusMsg.style.color = '#b3261e';
+      statusMsg.textContent = '✗ Submission failed: ' + err.message + '. Please try again — your answers are still in the form.';
+      console.error(err);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit';
+    }
+  });
+</script>
+
+</body>
+</html>
